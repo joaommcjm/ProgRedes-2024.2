@@ -16,10 +16,7 @@ socktcp.listen(1)
 print("Escutando em ...", (INTERFACE, PORT))
 
 while True:
-<<<<<<< HEAD
     #3 a)
-=======
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
     try:
         # Recebe a conexão
         conn, addr = socktcp.accept() 
@@ -40,11 +37,7 @@ while True:
                         if os.path.isfile(filePath):
                             fileSize = os.path.getsize(filePath)
                             finalFiles += "{:<20} {:>15} bytes.\n".format(file, fileSize)
-<<<<<<< HEAD
             
-=======
-
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
                     # Envia a listagem de arquivos para o cliente
                     print("Enviando lista de arquivos...")
                     print(finalFiles)
@@ -67,7 +60,6 @@ while True:
                         erro = f"Erro: Arquivo '{fileName}' não encontrado."
                         print(erro)
                         conn.send(erro.encode('utf-8')) # Envia a mensagem de erro para o cliente.
-<<<<<<< HEAD
                     
                     # Processa o arquivo caso ele exista
                     else:
@@ -77,17 +69,6 @@ while True:
                             print(f"Tamanho do arquivo: {tamanho_arquivo}")
                             file.seek(0) # Volta para o início do arquivo
                             conn.send(tamanho_arquivo.to_bytes(8, 'big')) # Envia o tamanho do arquvio ao cliente
-=======
-
-                    # Processa o arquivo caso ele exista
-                    else:
-                        with open(DIRBASE + fileName, 'rb') as file:
-                            file.seek(0, 2)                                 # Percorre o arquivo do inicio ao fim
-                            tamanho_arquivo = file.tell()                   # Pega o tamanho do arquivo
-                            print(f"Tamanho do arquivo: {tamanho_arquivo}")
-                            file.seek(0)                                    # Volta para o início do arquivo
-                            conn.send(tamanho_arquivo.to_bytes(8, 'big'))   # Envia o tamanho do arquvio ao cliente
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
 
                             print(f"Enviando o conteúdo do arquivo: {fileName}")
                             # Lê o arquivo em blocos de 4096, := atribui o resultado à chunk e verifica se ela não está vazia.
@@ -106,11 +87,7 @@ while True:
                     conn.send(erro.encode('utf-8'))
             # Multiplas solicitações de arquivos
             elif "mget" in comando:
-<<<<<<< HEAD
                 try:
-=======
-                
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
                     comando, mask = comando.split(maxsplit=1)
 
                     # Busca arquivos correspondentes a máscara
@@ -120,10 +97,7 @@ while True:
                         msg = f"Erro: Nenhum arquivo encontrada com a máscara."
                         print(msg)
                         conn.send(msg.encode('utf-8'))
-<<<<<<< HEAD
                         break
-=======
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
                     else:
                         # Envia a quantidade de arquivos encontrados para o cliente
                         conn.send(str(len(filePaths)).encode('utf-8'))
@@ -143,16 +117,10 @@ while True:
                                 while chunk := file.read(4096):
                                     conn.send(chunk)
                             print("Arquivo enviado.")
-<<<<<<< HEAD
                 except Exception as e:
                     erro = f"Erro no comando 'mget': {str(e)}"
                     print(erro)
                     conn.send(erro.encode('utf-8'))
-                    break
-                    
-=======
-                
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
             # Encerra a conexão e o programa
             elif "exit" in comando:
                 print("Encerrando servidor...")
@@ -165,16 +133,8 @@ while True:
                 conn.send(msg.encode('utf-8'))
     except Exception as e:
         print(f"Erro: {e}")
-<<<<<<< HEAD
 
     finally:
         conn.close()
         print("Conexão encerrada.")
         exit()
-=======
-        
-    finally:
-        conn.close()
-        print("Conexão encerrada.")
-        exit()
->>>>>>> 78d7320b10d8bbe74270ea068a04e445582a49d9
