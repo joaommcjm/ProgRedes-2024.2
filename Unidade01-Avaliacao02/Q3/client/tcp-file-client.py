@@ -16,7 +16,9 @@ while True:
     print("A) list  -Lista arquivos presentes no servidor.")
     print("B) sget <nome_do_arquivo> -Solicita o download de um arquivo do servidor.")
     print("C) mget <máscara> - Solicitar download de múltiplos arquivos.")
-    print("D) exit -Encerra a conexão e o programa.")
+    print("D) hash <nome_do_arquivo> <posição> - Calcula o hash do arquivo até uma posição especifica")
+    print("E) cget <nome_do_arquivo> - Continua o download de um arquivo")
+    print("F) exit -Encerra a conexão e o programa.")
 
     comandoValido = False
     comando = input("\ncomando: ")
@@ -101,11 +103,27 @@ while True:
                                 # Exibe erro que ocorrem durante o download de cada arquivo
                                 print(f"Erro ao processar o arquivo {fileName}: {str(e)}")
                             comandoValido = True
-
+            
                 except Exception as e:
                     # Exibe erro relacionado ao comando 'mget'
                     print(f"Erro no comando 'mget': {str(e)}")         
             
+            elif "hash" in comando:
+                try:
+                    socktcp.send(comando.encode('utf-8'))
+                    resposta = socktcp.recv(4096).decode('utf-8')
+                    print(f"Hash recebido do servidor: {resposta}")
+                except Exception as e:
+                    print(f"Erro ao solicitar o hash: {str(e)}")
+                comandoValido = True
+            
+            elif "cget" in comando:
+                try:
+                
+
+                except Exception as e:
+                    print(f"Erro! Não foi possivel continuar o download do arquivo: {str(e)}")
+                    comandoValido = True
             # Encerra a conexão e o programa   
             elif comando == "exit":
                     print("Encerrando conexão com o servidor.")
