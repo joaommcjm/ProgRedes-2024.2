@@ -17,6 +17,7 @@ print("Escutando em ...", (INTERFACE, PORT))
 
 # Laço principal para aceitar conexões de clientes
 while True:
+    #3 a)
     try:
         # Recebe a conexão
         conn, addr = socktcp.accept() 
@@ -73,7 +74,11 @@ while True:
                     
                     # Processa o arquivo caso ele exista
                     else:
+<<<<<<< HEAD
                         with open(filePath, 'rb') as file:
+=======
+                        with open(DIRBASE + fileName, 'rb') as file:
+>>>>>>> ad2659d999ba4d24fc0e66d2688315bb871ac278
                             file.seek(0, 2) # Percorre o arquivo do inicio ao fim
                             tamanho_arquivo = file.tell() # Pega o tamanho do arquivo
                             print(f"Tamanho do arquivo: {tamanho_arquivo}")
@@ -98,7 +103,10 @@ while True:
             # Multiplas solicitações de arquivos
             elif "mget" in comando:
                 try:
+<<<<<<< HEAD
                     # Divide o comando e a máscara fornecida
+=======
+>>>>>>> ad2659d999ba4d24fc0e66d2688315bb871ac278
                     comando, mask = comando.split(maxsplit=1)
 
                     # Busca arquivos correspondentes a máscara
@@ -110,6 +118,7 @@ while True:
                         msg = f"Erro: Máscara inválida."
                         print(msg)
                         conn.send(msg.encode('utf-8'))
+                        break
                     else:
                         # Envia a quantidade de arquivos encontrados para o cliente
                         conn.send(str(len(safePaths)).encode('utf-8'))
@@ -128,6 +137,7 @@ while True:
                                 print(f"Enviando arquivo {fileName} com {fileSize} bytes.")
                                 while chunk := file.read(4096):
                                     conn.send(chunk)
+<<<<<<< HEAD
                             print("Arquivo enviado.")    
 
                 except Exception as e:
@@ -202,6 +212,14 @@ while True:
                     conn.send(erro.encode('utf-8'))
 
              # Encerra a conexão e o programa
+=======
+                            print("Arquivo enviado.")
+                except Exception as e:
+                    erro = f"Erro no comando 'mget': {str(e)}"
+                    print(erro)
+                    conn.send(erro.encode('utf-8'))
+            # Encerra a conexão e o programa
+>>>>>>> ad2659d999ba4d24fc0e66d2688315bb871ac278
             elif "exit" in comando:
                 print("Encerrando servidor...")
                 conn.close()
@@ -217,5 +235,9 @@ while True:
     finally:
         conn.close()
         print("Conexão encerrada.")
+<<<<<<< HEAD
         exit()
         
+=======
+        exit()
+>>>>>>> ad2659d999ba4d24fc0e66d2688315bb871ac278
