@@ -2,4 +2,4 @@
 
 - Nome: José Eduardo Bezerra de Medeiros - Matrícula: 20241014050009 - Usuário git: eduardobezerraz
 
-https://github.com/joaommcjm/ProgRedes-2024.2
+Usuário que está entregando: joaommcjm
