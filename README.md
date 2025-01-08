@@ -2,4 +2,4 @@
 
 - Nome: José Eduardo Bezerra de Medeiros - Matrícula: 20241014050009 - Usuário git: eduardobezerraz
 
-Usuário que está entregando: joaommcjm
+- Usuário que está entregando: joaommcjm
